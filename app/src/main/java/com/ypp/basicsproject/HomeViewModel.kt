@@ -33,11 +33,7 @@ class HomeViewModel @Inject constructor(
             val job=launch (CoroutineExceptionHandler { coroutineContext, throwable ->
                 throwable.printStackTrace()
             }){
-                homeRepository.updateBanner({
-
-                },{
-
-                })
+                homeRepository.updateBanner()
             }
 
         }
