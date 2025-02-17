@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-option java_package = "com.ypp.model.datastore";
-option java_multiple_files = true;
-
-message Banners {
-  // filter for showing / hiding completed tasks
-  bool show_completed = 1;
-}
