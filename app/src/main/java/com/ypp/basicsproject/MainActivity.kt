@@ -137,6 +137,7 @@ fun Greeting(
         HomeUiState.Loading -> {
             Text(text = "$homeConfigState", modifier = Modifier)
         }
+        //新分支的内容
         is HomeUiState.Success -> {
             Column (modifier = Modifier.fillMaxSize()){
                 Text(
