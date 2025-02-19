@@ -20,7 +20,6 @@ internal interface HomeRepositoryModule {
     fun bindingHomeDataSource(
        netWorkHomeDataSource: NetWorkHomeDataSource
     ):HomeDataSource
-
 }
 
 

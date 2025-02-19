@@ -130,28 +130,38 @@ fun Greeting(
         }
 
     }
-    LoginScreen()
-//    Column (modifier = Modifier.fillMaxSize()){
-//        Text(
-//        text = "Hello${homeConfigState}",
-//        modifier = modifier,
-//    )
-//
-//       Button(onClick = {
-//           viewModel.updateBanner()
-//
-//       }) {
-//           Text("主线程崩溃测试")
-//
-//       }
-//        Button(onClick = {
-//            viewModel.updateTopJson()
-//
-//        }) {
-//            Text("子线程崩溃测试")
-//
-//        }
-//    }
+//    LoginScreen()
+    when(homeConfigState){
+        HomeUiState.EmptyQuery -> {  Text(text = "$homeConfigState", modifier = Modifier)}
+        HomeUiState.LoadFailed ->{  Text(text = "$homeConfigState", modifier = Modifier)}
+        HomeUiState.Loading -> {
+            Text(text = "$homeConfigState", modifier = Modifier)
+        }
+        is HomeUiState.Success -> {
+            Column (modifier = Modifier.fillMaxSize()){
+                Text(
+                    text = "Hello${(homeConfigState as HomeUiState.Success).homeConfig.banner}",
+                    modifier = modifier,
+                )
+
+                Button(onClick = {
+                    viewModel.updateBanner()
+
+                }) {
+                    Text("主线程崩溃测试")
+
+                }
+                Button(onClick = {
+                    viewModel.updateTopJson()
+
+                }) {
+                    Text("子线程崩溃测试")
+
+                }
+            }
+
+        }
+    }
 
 
 

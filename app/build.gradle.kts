@@ -1,11 +1,9 @@
-import com.sun.xml.bind.v2.model.core.ID
-import org.jetbrains.kotlin.gradle.model.Kapt
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.protobuf)
     id("kotlin-kapt")
 }
 
@@ -52,6 +50,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(project(":core:domain"))
     implementation(project(":core:network"))
+    implementation(project(":core:datastore"))
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

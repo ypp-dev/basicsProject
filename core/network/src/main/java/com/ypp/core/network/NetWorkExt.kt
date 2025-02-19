@@ -20,11 +20,12 @@ fun<T> request(
     call:suspend ()->T):Flow<T>{
     return flow {
         val response=call()
-        if (true){
-            throw Throwable("xxxxxx")
-        }else{
-            emit(response)
-        }
+        emit(response)
+//        if (true){
+//            throw Throwable("xxxxxx")
+//        }else{
+//            emit(response)
+//        }
        }
 }
 

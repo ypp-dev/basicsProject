@@ -30,6 +30,7 @@ class HomeViewModel @Inject constructor(
             initialValue = HomeUiState.Loading)
     fun updateBanner(){
         viewModelScope.launch (){
+
             val job=launch (CoroutineExceptionHandler { coroutineContext, throwable ->
                 throwable.printStackTrace()
             }){

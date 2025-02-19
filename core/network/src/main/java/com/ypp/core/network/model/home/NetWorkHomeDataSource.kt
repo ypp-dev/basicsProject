@@ -26,8 +26,8 @@ class NetWorkHomeDataSource @Inject constructor(
             netWorkClient.banner()
         }.catch {
             it.printStackTrace()
-        }.collectLatest {
-            banners.updateData { it }
+        }.collectLatest {newDate->
+
         }
     }
 
