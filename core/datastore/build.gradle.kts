@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.protobuf)
-//    id(libs.plugins.protobuf)
+    id("android-hilt-plugin")
+    id("android-room-plugin")
 }
 
 android {

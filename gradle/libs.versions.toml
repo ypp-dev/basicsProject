@@ -24,7 +24,8 @@ androidxBrowser = "1.8.0"
 androidxComposeBom = "2024.02.02"
 firebaseCrashlyticsPlugin = "2.9.9"
 firebasePerfPlugin = "1.4.2"
-ksp = "1.9.22-1.0.18"
+#ksp = "1.9.22-1.0.18"
+ksp = "2.0.0-1.0.24"
 room = "2.6.1"
 androidxDataStore="1.1.2"
 jetbrainsKotlinJvm = "2.0.0"
@@ -32,6 +33,7 @@ lifecycleRuntimeComposeAndroid = "2.8.7"
 retrofitKotlinxSerializationJson = "1.0.0"
 protobufPlugin = "0.9.4"
 protobuf = "3.25.2"
+truth = "1.4.2"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -63,8 +65,10 @@ retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "re
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
-
-
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -79,10 +83,11 @@ androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", nam
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+#kotlin-android = { id = "org.jetbrains.kotlin.android", version = "2.0.10" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.22" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-
+room = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

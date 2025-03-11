@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import com.ypp.core.network.NetWorkClient
 import com.ypp.core.network.TopJsonBean
 import com.ypp.core.network.request
+import com.ypp.datastore.UserInfo
+import com.ypp.datastore.database.UserInfoDatabase
 import com.ypp.model.datastore.Banners
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,11 +17,13 @@ import javax.inject.Inject
 class NetWorkHomeDataSource @Inject constructor(
     private val netWorkClient: NetWorkClient,
     private val banners: DataStore<Banners>,
+    private val userInfoDatabase: UserInfoDatabase
 ) :HomeDataSource{
     private val _topJsonFlow= MutableStateFlow(TopJsonBean())
     override fun banner(): Flow<Banners> =banners.data
 
     override fun topJson(): Flow<TopJsonBean> =_topJsonFlow.asStateFlow()
+    override fun userInfo(): Flow<UserInfo> =userInfoDatabase.userDao().getUsers()
 
     override suspend fun updateBanner() {
         request{
@@ -30,8 +34,6 @@ class NetWorkHomeDataSource @Inject constructor(
 
         }
     }
-
-
     override suspend fun updateTopJson(succeed: () -> Unit, fail: () -> Unit) {
         try {
             val response=netWorkClient.topJson()
@@ -47,5 +49,9 @@ class NetWorkHomeDataSource @Inject constructor(
         }
 
 
+    }
+
+    override suspend fun addUserInfo(userInfo: UserInfo) {
+        userInfoDatabase.userDao().addUserInfo(userInfo)
     }
 }

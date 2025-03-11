@@ -4,6 +4,7 @@ package com.ypp.domain
 import com.ypp.core.network.TopJsonBean
 
 import com.ypp.core.network.model.home.HomeRepository
+import com.ypp.datastore.UserInfo
 import com.ypp.model.datastore.Banners
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -14,9 +15,14 @@ class HomeConfigUseCase @Inject constructor(
 ) {
 
     operator fun invoke() :Flow<HomeConfig>{
-       return combine(homeRepository.banner(),homeRepository.topJson()){
-                banner ,topJson->
-            HomeConfig(banner = banner, topJson = topJson)
+       return combine(
+           homeRepository.banner(),
+           homeRepository.topJson(),
+           homeRepository.userInfo()){
+                banner ,topJson,userInfo->
+            HomeConfig(banner = banner,
+                topJson = topJson,
+                userInfo=userInfo)
         }
     }
 
@@ -24,5 +30,6 @@ class HomeConfigUseCase @Inject constructor(
 }
 data class HomeConfig(
     val banner: Banners,
-    val topJson:TopJsonBean
+    val topJson:TopJsonBean,
+    val userInfo: UserInfo
 )

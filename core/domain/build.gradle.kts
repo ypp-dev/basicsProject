@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("android-hilt-plugin")
+    id("android-room-plugin")
 }
 
 android {
