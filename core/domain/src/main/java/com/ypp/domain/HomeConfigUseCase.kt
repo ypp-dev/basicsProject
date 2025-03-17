@@ -2,7 +2,6 @@ package com.ypp.domain
 
 
 import com.ypp.core.network.TopJsonBean
-
 import com.ypp.core.network.model.home.HomeRepository
 import com.ypp.datastore.UserInfo
 import com.ypp.model.datastore.Banners
@@ -18,11 +17,13 @@ class HomeConfigUseCase @Inject constructor(
        return combine(
            homeRepository.banner(),
            homeRepository.topJson(),
-           homeRepository.userInfo()){
+           homeRepository.userInfo()
+       ){
                 banner ,topJson,userInfo->
             HomeConfig(banner = banner,
                 topJson = topJson,
-                userInfo=userInfo)
+                userInfo=userInfo
+            )
         }
     }
 
@@ -31,5 +32,5 @@ class HomeConfigUseCase @Inject constructor(
 data class HomeConfig(
     val banner: Banners,
     val topJson:TopJsonBean,
-    val userInfo: UserInfo
+    val userInfo: List<UserInfo>
 )

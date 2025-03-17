@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface HomeDataSource {
     fun banner():Flow<Banners>
     fun topJson():Flow<TopJsonBean>
-    fun userInfo():Flow<UserInfo>
+    fun userInfo():Flow<List<UserInfo>>
     suspend fun updateBanner()
     suspend fun updateTopJson(succeed:()->Unit,fail:()->Unit)
     suspend fun addUserInfo(userInfo: UserInfo)

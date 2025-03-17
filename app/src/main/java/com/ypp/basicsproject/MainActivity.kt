@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ypp.basicsproject.ui.theme.BasicsProjectTheme
+import com.ypp.datastore.UserInfo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -57,8 +58,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-@Preview
-fun LoginScreen() {
+fun LoginScreen(
+    homeConfigState:HomeUiState
+    ,login:(String,String)->Unit) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -69,6 +71,22 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        when(homeConfigState){
+            HomeUiState.EmptyQuery -> {  Text(text = "$homeConfigState", modifier = Modifier)}
+            HomeUiState.LoadFailed ->{  Text(text = "$homeConfigState", modifier = Modifier)}
+            HomeUiState.Loading -> {
+                Text(text = "$homeConfigState", modifier = Modifier)
+            }
+            is HomeUiState.Success -> {
+                Text(
+                    text = "用户信息${homeConfigState.homeConfig.userInfo}",
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(bottom = 32.dp)
+                )
+            }
+
+        }
+
         Text(
             text = "登录",
             fontSize = 24.sp,
@@ -99,7 +117,7 @@ fun LoginScreen() {
         Button(
             onClick = {
                 // 处理登录逻辑
-                println("用户名: $username, 密码: $password")
+                login(username,password)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -114,8 +132,6 @@ fun Greeting(
     viewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier = Modifier) {
     val homeConfigState by  viewModel.getHomeConfig.collectAsStateWithLifecycle()
-//    val getHomeConfigRepository by  viewModel.getHomeConfigRepository.collectAsStateWithLifecycle()
-//    val banner by viewModel.banner.collectAsStateWithLifecycle(initialValue = BannerBean())
     val scope= rememberCoroutineScope()
     LaunchedEffect(Unit) {
         scope.launch (Dispatchers.IO){
@@ -123,46 +139,43 @@ fun Greeting(
                 Log.e("TAG", "getHomeConfig$it: ", )
             }
         }
-        scope.launch (Dispatchers.IO){
-            viewModel.getHomeConfig.collectLatest {
-                Log.e("TAG", "getHomeConfig$it: ", )
-            }
-        }
-
     }
 //    LoginScreen()
-    when(homeConfigState){
-        HomeUiState.EmptyQuery -> {  Text(text = "$homeConfigState", modifier = Modifier)}
-        HomeUiState.LoadFailed ->{  Text(text = "$homeConfigState", modifier = Modifier)}
-        HomeUiState.Loading -> {
-            Text(text = "$homeConfigState", modifier = Modifier)
-        }
-        //face1分支的内容
-        is HomeUiState.Success -> {
-            Column (modifier = Modifier.fillMaxSize()){
-                Text(
-                    text = "Hello${(homeConfigState as HomeUiState.Success).homeConfig.banner}",
-                    modifier = modifier,
-                )
-
-                Button(onClick = {
-                    viewModel.updateBanner()
-
-                }) {
-                    Text("主线程崩溃测试")
-
-                }
-                Button(onClick = {
-                    viewModel.updateTopJson()
-
-                }) {
-                    Text("子线程崩溃测试")
-
-                }
-            }
-
-        }
+    LoginScreen(homeConfigState){username,password->
+        viewModel.addUserInfo(UserInfo(userName = username, password = password))
     }
+//    when(homeConfigState){
+//        HomeUiState.EmptyQuery -> {  Text(text = "$homeConfigState", modifier = Modifier)}
+//        HomeUiState.LoadFailed ->{  Text(text = "$homeConfigState", modifier = Modifier)}
+//        HomeUiState.Loading -> {
+//            Text(text = "$homeConfigState", modifier = Modifier)
+//        }
+//        //face1分支的内容
+//        is HomeUiState.Success -> {
+//            Column (modifier = Modifier.fillMaxSize()){
+//                Text(
+//                    text = "Hello${(homeConfigState as HomeUiState.Success).homeConfig.banner}",
+//                    modifier = modifier,
+//                )
+//
+//                Button(onClick = {
+//                    viewModel.updateBanner()
+//
+//                }) {
+//                    Text("主线程崩溃测试")
+//
+//                }
+//                Button(onClick = {
+//                    viewModel.updateTopJson()
+//
+//                }) {
+//                    Text("子线程崩溃测试")
+//
+//                }
+//            }
+//
+//        }
+//    }
 
 
 

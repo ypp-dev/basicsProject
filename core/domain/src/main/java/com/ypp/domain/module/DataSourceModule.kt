@@ -33,7 +33,7 @@ object DataSourceModule{
     fun provideUserInfoDataSource(
         @ApplicationContext appContext: Context)= Room.databaseBuilder(
          appContext,
-        UserInfoDatabase::class.java, "userinfo.db"
+        UserInfoDatabase::class.java, "localUserInfo.db"
     ).build()
 
 }

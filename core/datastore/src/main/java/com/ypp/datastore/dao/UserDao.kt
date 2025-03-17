@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     @Query("SELECT * FROM userinfo")
-    fun getUsers():Flow<UserInfo>
+    fun getUsers():Flow<List<UserInfo>>
 
 //    fun findByName(name:String):List<UserInfo>
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun addUserInfo(userInfo: UserInfo)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addUserInfo(userInfo: UserInfo)
 }

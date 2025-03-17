@@ -3,10 +3,12 @@ package com.ypp.basicsproject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ypp.core.network.model.home.HomeRepository
+import com.ypp.datastore.UserInfo
 import com.ypp.domain.HomeConfig
 import com.ypp.domain.HomeConfigUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -37,6 +39,11 @@ class HomeViewModel @Inject constructor(
                 homeRepository.updateBanner()
             }
 
+        }
+    }
+    fun addUserInfo(userInfo: UserInfo){
+        viewModelScope.launch(Dispatchers.IO) {
+            homeRepository.addUserInfo(userInfo)
         }
     }
     fun updateTopJson(){

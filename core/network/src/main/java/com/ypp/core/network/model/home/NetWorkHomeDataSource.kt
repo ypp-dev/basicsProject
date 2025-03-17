@@ -23,7 +23,7 @@ class NetWorkHomeDataSource @Inject constructor(
     override fun banner(): Flow<Banners> =banners.data
 
     override fun topJson(): Flow<TopJsonBean> =_topJsonFlow.asStateFlow()
-    override fun userInfo(): Flow<UserInfo> =userInfoDatabase.userDao().getUsers()
+    override fun userInfo(): Flow<List<UserInfo>> =userInfoDatabase.userDao().getUsers()
 
     override suspend fun updateBanner() {
         request{
