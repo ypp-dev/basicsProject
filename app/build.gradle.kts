@@ -1,3 +1,5 @@
+//import com.ypp.myplugin.libs
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -60,6 +62,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.coil.compose)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     testImplementation(libs.junit)

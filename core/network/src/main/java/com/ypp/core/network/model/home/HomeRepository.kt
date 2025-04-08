@@ -12,7 +12,7 @@ interface HomeRepository {
     fun banner():Flow<Banners>
     fun topJson():Flow<TopJsonBean>
     fun userInfo():Flow<List<UserInfo>>
-    suspend fun updateBanner()
+    suspend fun updateBanner():Boolean
     suspend fun updateTopJson(succeed:()->Unit,fail:()->Unit)
     suspend fun addUserInfo(userInfo: UserInfo)
 

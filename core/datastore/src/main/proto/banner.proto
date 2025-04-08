@@ -3,7 +3,6 @@ syntax = "proto3";
 option java_package = "com.ypp.model.datastore";
 option java_multiple_files = true;
 message Banners {
-
   message Banner {
     string desc = 1;
     uint32 id = 2;
@@ -14,8 +13,5 @@ message Banners {
     uint32 type = 7;
     string url = 8;
   }
-
   repeated Banner banner = 1;
-  uint32 error_code = 2;
-  string error_msg = 3;
 }

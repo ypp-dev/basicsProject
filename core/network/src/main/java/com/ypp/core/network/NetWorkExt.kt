@@ -16,6 +16,17 @@ suspend fun<T> request(
             fail()
     }
 }
+suspend fun <T> request(
+    call: suspend () -> T,
+    sync: suspend (T)->Unit
+):Boolean= runCatching {
+    call()
+}.onSuccess { sync(it) }
+    .onFailure {
+        it.printStackTrace()
+    }
+    .isSuccess
+
 fun<T> request(
     call:suspend ()->T):Flow<T>{
     return flow {

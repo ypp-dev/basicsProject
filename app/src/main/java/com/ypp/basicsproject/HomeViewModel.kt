@@ -1,5 +1,6 @@
 package com.ypp.basicsproject
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ypp.core.network.model.home.HomeRepository
@@ -7,8 +8,8 @@ import com.ypp.datastore.UserInfo
 import com.ypp.domain.HomeConfig
 import com.ypp.domain.HomeConfigUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -22,7 +23,7 @@ class HomeViewModel @Inject constructor(
     homeConfigUseCase: HomeConfigUseCase,
     private val homeRepository: HomeRepository
 ) :ViewModel() {
-    val getHomeConfig: StateFlow<HomeUiState> = homeConfigUseCase()
+    val homeUiState: StateFlow<HomeUiState> = homeConfigUseCase()
         .map{homeConfig->
             HomeUiState.Success(homeConfig)
         }.catch {
@@ -32,12 +33,12 @@ class HomeViewModel @Inject constructor(
             initialValue = HomeUiState.Loading)
     fun updateBanner(){
         viewModelScope.launch (){
-
-            val job=launch (CoroutineExceptionHandler { coroutineContext, throwable ->
-                throwable.printStackTrace()
-            }){
+            async {
                 homeRepository.updateBanner()
-            }
+            }.await()
+            Log.e("TAG", "updateBanner: "+  async {
+                homeRepository.updateBanner()
+            }.await() )
 
         }
     }

@@ -16,10 +16,7 @@ class NetworkHomeRepository @Inject constructor(
     override fun topJson(): Flow<TopJsonBean> =homeDataSource.topJson()
     override fun userInfo(): Flow<List<UserInfo>> =homeDataSource.userInfo()
 
-    override suspend fun updateBanner() {
-        homeDataSource.updateBanner()
-    }
-
+    override suspend fun updateBanner() =homeDataSource.updateBanner()
     override suspend fun updateTopJson(succeed: () -> Unit, fail: () -> Unit) {
        homeDataSource.updateTopJson(succeed = succeed,fail=fail)
     }
