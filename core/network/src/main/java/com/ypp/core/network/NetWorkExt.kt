@@ -2,6 +2,7 @@ package com.ypp.core.network
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlin.coroutines.cancellation.CancellationException
 
 suspend fun<T> request(
     call:suspend ()->T,
@@ -19,24 +20,25 @@ suspend fun<T> request(
 suspend fun <T> request(
     call: suspend () -> T,
     sync: suspend (T)->Unit
-):Boolean= runCatching {
+):Result<T> = runCatching {
     call()
-}.onSuccess { sync(it) }
+} .onSuccess { sync(it) }
     .onFailure {
-        it.printStackTrace()
+        //此处处理网络失败的相关异常
+        if (it is CancellationException ){
+            throw it
+        }else{
+            it.printStackTrace()
+        }
     }
-    .isSuccess
+
 
 fun<T> request(
     call:suspend ()->T):Flow<T>{
     return flow {
         val response=call()
         emit(response)
-//        if (true){
-//            throw Throwable("xxxxxx")
-//        }else{
-//            emit(response)
-//        }
+
        }
 }
 

@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
-    id("android-room-plugin")
 }
 
 android {
@@ -37,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:datastore"))
+    api(project(":core:model"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

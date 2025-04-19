@@ -1,7 +1,7 @@
 package com.ypp.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.ypp.core.network.bean.BannerBean
+import com.ypp.model.BannerBean
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -38,7 +38,7 @@ class NetWorkClient @Inject constructor():WanAndroidApi{
     //获取Banner的数据
     override suspend fun banner(): BannerBean = wanAndroid.banner()
 
-    override suspend fun topJson():TopJsonBean=wanAndroid.topJson()
+    override suspend fun topJson(): com.ypp.model.TopJsonBean =wanAndroid.topJson()
 
 
 }

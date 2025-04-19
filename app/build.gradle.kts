@@ -10,6 +10,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("D:\\ypp.key")
+            storePassword = "ypp123"
+            keyAlias = "ypp"
+            keyPassword = "ypp123"
+        }
+        create("release") {
+            storeFile = file("D:\\ypp.key")
+            storePassword = "ypp123"
+            keyAlias = "ypp"
+            keyPassword = "ypp123"
+        }
+    }
     namespace = "com.ypp.basicsproject"
     compileSdk = 34
 
@@ -25,11 +39,21 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        debug {
+            isMinifyEnabled=false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+
         }
     }
     compileOptions {
@@ -45,6 +69,7 @@ android {
     buildFeatures {
         compose = true
     }
+//    dynamicFeatures += setOf(":feature", ":feature")
 }
 
 dependencies {
@@ -53,6 +78,9 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:network"))
     implementation(project(":core:datastore"))
+    implementation(project(":core:data"))
+    implementation(project(":faeture:home"))
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

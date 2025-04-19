@@ -1,6 +1,6 @@
 package com.ypp.core.network
 
-import com.ypp.core.network.bean.BannerBean
+import com.ypp.model.BannerBean
 import retrofit2.http.GET
 
 interface WanAndroidApi {
@@ -11,5 +11,5 @@ interface WanAndroidApi {
     suspend fun banner(): BannerBean
 
     @GET("/article/top/json")
-    suspend fun topJson():TopJsonBean
+    suspend fun topJson(): com.ypp.model.TopJsonBean
 }
