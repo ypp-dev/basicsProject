@@ -13,7 +13,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("android-room-plugin")
                 apply("android-hilt-plugin")
             }
-
             // 获取Version Catalog
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 

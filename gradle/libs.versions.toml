@@ -88,6 +88,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 #kotlin-android = { id = "org.jetbrains.kotlin.android", version = "2.0.10" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.22" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 room = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
@@ -97,4 +98,6 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 basics-android-hilt = { id = "basics.android.hilt", version = "unspecified" }
+ypp-hilt-plugin = { id = "com.ypp.myplugin.AndroidHiltConventionPlugin", version = "unspecified" }
+ypp-feat-plugin = { id = "com.ypp.myplugin.AndroidFeatureConventionPlugin", version = "unspecified" }
 
