@@ -25,6 +25,7 @@ include(":app")
 include(":core:network")
 include(":core:domain")
 include(":core:datastore")
-include(":feature:home")
 include(":core:data")
 include(":core:model")
+include(":feature:home")
+
