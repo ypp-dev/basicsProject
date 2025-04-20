@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-//    id("feature-plugin")
-//    alias(libs.plugins.ypp.feat)
+    id("feature-plugin")
 
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
