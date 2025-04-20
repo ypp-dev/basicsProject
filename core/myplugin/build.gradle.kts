@@ -45,6 +45,10 @@ gradlePlugin{
             id = "android-room-plugin"
             implementationClass = "com.ypp.myplugin.AndroidRoomConventionPlugin"
         }
+        register("featurePlugin") {
+            id = "feature-plugin"
+            implementationClass = "com.ypp.myplugin.AndroidFeatureConventionPlugin"
+        }
     }
 
 }

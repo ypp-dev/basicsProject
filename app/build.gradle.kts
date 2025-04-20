@@ -79,7 +79,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:datastore"))
     implementation(project(":core:data"))
-    implementation(project(":faeture:home"))
+    implementation(project(":feature:home"))
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
