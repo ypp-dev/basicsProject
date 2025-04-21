@@ -12,13 +12,13 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            storeFile = file("D:\\ypp.key")
+            storeFile = file("../ypp.key")
             storePassword = "ypp123"
             keyAlias = "ypp"
             keyPassword = "ypp123"
         }
         create("release") {
-            storeFile = file("D:\\ypp.key")
+            storeFile = file("../ypp.key")
             storePassword = "ypp123"
             keyAlias = "ypp"
             keyPassword = "ypp123"
