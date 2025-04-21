@@ -29,3 +29,4 @@ include(":core:data")
 include(":core:model")
 include(":feature:home")
 
+include(":core:webSocket")
