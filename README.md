@@ -12,8 +12,6 @@
 ## 分层职责
 ![分层职责](responsibility.png)
 
-# BasicsProject
-
 ## 项目结构
 ![项目结构](whiteboard_exported_image.png)
 
