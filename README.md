@@ -15,17 +15,10 @@
 # BasicsProject
 
 ## 项目结构
-
-1. Coroutine + Flow
-2. Hilt
-3. Compose
-4. Room
-5. DataSource
-6. ViewModel
-7. Lifecycle
+![项目结构](whiteboard_exported_image.png)
 
 ## 架构流程图
 ![架构流程图](android_state_flow.png)
 ## MVI or MVX？
-在目前Android的架构下，不论是MVX都可以很好的融入到现在的体系中，不论下游如何实现data（domain）的实现都可以不受影响。
+在目前Android的架构下，不论是MVX都可以很好的融入到现在的体系中，不论下游如何实现data（domain）的都可以不受影响。
 
