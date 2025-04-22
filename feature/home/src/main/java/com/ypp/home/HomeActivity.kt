@@ -84,7 +84,7 @@ fun LoginScreen(
     LaunchedEffect(Unit) {
         while (true) {
             delay(3000) // 每3秒切换一次
-            scope.launch {
+            launch(Dispatchers.IO) {
                 pageState.animateScrollToPage(pageState.currentPage + 1)
             }
         }
@@ -182,9 +182,9 @@ fun Greeting(
     modifier: Modifier=Modifier) {
     val context= LocalContext.current
     val homeUiState by  viewModel.homeUiState.collectAsStateWithLifecycle()
-    val scope= rememberCoroutineScope()
+
     LaunchedEffect(Unit) {
-        scope.launch (Dispatchers.IO){
+        launch (Dispatchers.IO){
             viewModel.updateBanner()
         }
     }
