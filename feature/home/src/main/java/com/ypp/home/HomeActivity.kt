@@ -89,88 +89,91 @@ fun LoginScreen(
             }
         }
     }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Banner区域
-        Box(
+    if (homeConfig.banner.bannerList.isNotEmpty()){
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(160.dp)
-                .background(Color.LightGray),
-            contentAlignment = Alignment.Center
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            HorizontalPager(
-                state = pageState,
-                modifier = Modifier.fillMaxSize()
-            ) { page ->
-                // 使用实际页面索引来获取图片
-                val actualIndex = page % homeConfig.banner.bannerCount
-                AsyncImage(
-                    model = homeConfig.banner.getBanner(actualIndex).imagePath,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = ""
-                )
+            // Banner区域
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(160.dp)
+                    .background(Color.LightGray),
+                contentAlignment = Alignment.Center
+            ) {
+                HorizontalPager(
+                    state = pageState,
+                    modifier = Modifier.fillMaxSize()
+                ) { page ->
+                    // 使用实际页面索引来获取图片
+                    val actualIndex = page % homeConfig.banner.bannerCount
+                    AsyncImage(
+                        model = homeConfig.banner.getBanner(actualIndex).imagePath,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = ""
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+            Text(
+                text = "登录",
+                fontSize = 24.sp,
+                modifier = Modifier.padding(bottom = 32.dp)
+            )
+
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("用户名") },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("密码") },
+                modifier = Modifier.fillMaxWidth(),
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+            Button(
+                onClick = {
+                    // 处理登录逻辑
+
+                    login(username,password)
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("登录")
+            }
+            Spacer(modifier = Modifier.height(24.dp))
+            // 修改刷新Banner按钮的逻辑
+            Button(
+                onClick = {
+                    upDateBanner()
+                    bannerText = "Banner已更新 ${System.currentTimeMillis()}"
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("刷新Banner")
             }
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-
-        Text(
-            text = "登录",
-            fontSize = 24.sp,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("用户名") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("密码") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = {
-                // 处理登录逻辑
-
-                login(username,password)
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("登录")
-        }
-        Spacer(modifier = Modifier.height(24.dp))
-        // 修改刷新Banner按钮的逻辑
-        Button(
-            onClick = {
-                upDateBanner()
-                bannerText = "Banner已更新 ${System.currentTimeMillis()}"
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("刷新Banner")
-        }
     }
+
+
 }
 
 @Composable
